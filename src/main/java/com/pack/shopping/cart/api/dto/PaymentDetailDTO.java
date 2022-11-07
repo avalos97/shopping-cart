@@ -19,8 +19,8 @@ public class PaymentDetailDTO extends RepresentationModel<PaymentDetailDTO> impl
 
     private static final long serialVersionUID = 1L;
 
-    @JsonProperty("id")
-    private String id;
+    @JsonProperty("orderId")
+    private String orderId;
 
     @JsonProperty("customer")
     private CustomerInfoOnCardDTO customer;
@@ -38,16 +38,16 @@ public class PaymentDetailDTO extends RepresentationModel<PaymentDetailDTO> impl
      * @return orderId
      */
     @ApiModelProperty(value = "Identifier")
-    public String getId() {
-        return id;
+    public String getOrderId() {
+        return orderId;
     }
     
-    public void setId(String id) {
-        this.id = id;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
     
-    public PaymentDetailDTO id(String id) {
-        this.id = id;
+    public PaymentDetailDTO id(String orderId) {
+        this.orderId = orderId;
         return this;
     }
     
@@ -122,7 +122,7 @@ public class PaymentDetailDTO extends RepresentationModel<PaymentDetailDTO> impl
             return false;
         }
         PaymentDetailDTO paymentDetailDTO = (PaymentDetailDTO) o;
-        return Objects.equals(this.id, paymentDetailDTO.id) &&
+        return Objects.equals(this.orderId, paymentDetailDTO.orderId) &&
                 Objects.equals(this.customer, paymentDetailDTO.customer) &&
                 Objects.equals(this.card, paymentDetailDTO.card) &&
                 Objects.equals(this.amount, paymentDetailDTO.amount);
@@ -130,7 +130,7 @@ public class PaymentDetailDTO extends RepresentationModel<PaymentDetailDTO> impl
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customer, card, amount);
+        return Objects.hash(orderId, customer, card, amount);
     }
 
     @Override
@@ -138,7 +138,7 @@ public class PaymentDetailDTO extends RepresentationModel<PaymentDetailDTO> impl
         StringBuilder sb = new StringBuilder();
         sb.append("class PaymentReq {\n");
 
-        sb.append("    id: ").append(toIndentedString(id)).append("\n");
+        sb.append("    id: ").append(toIndentedString(orderId)).append("\n");
         sb.append("    customer: ").append(toIndentedString(customer)).append("\n");
         sb.append("    card: ").append(toIndentedString(card)).append("\n");
         sb.append("    amount: ").append(toIndentedString(amount)).append("\n");

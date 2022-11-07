@@ -20,7 +20,7 @@ public class ItemEntity {
     @Id
     @GeneratedValue
     @Column(name = "item_id", updatable = false, nullable = false)
-    private UUID id;
+    private UUID itemId;
 
     @Column(name = "product_id")
     private Integer productId;
@@ -37,12 +37,12 @@ public class ItemEntity {
     @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
     private List<OrderEntity> orders;
 
-    public UUID getId() {
-        return id;
+    public UUID getItemId() {
+        return itemId;
     }
 
-    public ItemEntity setId(UUID id) {
-        this.id = id;
+    public ItemEntity setItemId(UUID itemId) {
+        this.itemId = itemId;
         return this;
     }
 
