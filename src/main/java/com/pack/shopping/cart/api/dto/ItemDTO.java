@@ -1,6 +1,7 @@
 package com.pack.shopping.cart.api.dto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -18,7 +19,7 @@ public class ItemDTO extends RepresentationModel<ItemDTO> implements Serializabl
 
     private static final long serialVersionUID = 1L;
 
-    @JsonProperty("ItemId")
+    @JsonProperty("itemId")
     private String itemId;
 
     @JsonProperty("name")
@@ -34,7 +35,7 @@ public class ItemDTO extends RepresentationModel<ItemDTO> implements Serializabl
     private Integer quantity;
 
     @JsonProperty("unitPrice")
-    private java.math.BigDecimal unitPrice = null;
+    private BigDecimal unitPrice = null;
 
     
     /**
@@ -142,15 +143,15 @@ public class ItemDTO extends RepresentationModel<ItemDTO> implements Serializabl
      */
     @ApiModelProperty(value = "The item's price per unit")
     @Valid
-    public java.math.BigDecimal getUnitPrice() {
+    public BigDecimal getUnitPrice() {
         return unitPrice;
     }
     
-    public void setUnitPrice(java.math.BigDecimal unitPrice) {
+    public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public ItemDTO unitPrice(java.math.BigDecimal unitPrice) {
+    public ItemDTO unitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
         return this;
     }
