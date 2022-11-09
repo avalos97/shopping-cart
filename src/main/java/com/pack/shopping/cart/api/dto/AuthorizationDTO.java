@@ -1,7 +1,7 @@
 package com.pack.shopping.cart.api.dto;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -13,7 +13,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
+import lombok.NoArgsConstructor;
+@NoArgsConstructor
 @ApiModel(description = "Request object for a new Authorization.")
 public class AuthorizationDTO extends RepresentationModel<AuthorizationDTO> implements Serializable {
 
@@ -22,8 +23,11 @@ public class AuthorizationDTO extends RepresentationModel<AuthorizationDTO> impl
     @JsonProperty("id")
     private String id;
 
+    @JsonProperty("orderId")
+    private String orderId;
+
     @JsonProperty("time")
-    private LocalDateTime time;
+    private Timestamp time;
 
     @JsonProperty("authorized")
     private Boolean authorized;
@@ -34,23 +38,37 @@ public class AuthorizationDTO extends RepresentationModel<AuthorizationDTO> impl
     @JsonProperty("error")
     private String error;
 
+
+    @ApiModelProperty(value = "Order Identification")
+    public String getOrderId() {
+        return orderId;
+    }
     
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public AuthorizationDTO orderId(String orderId) {
+        this.orderId = orderId;
+        return this;
+    }
+
     /**
      * Authorization Identification
      * 
      * @return orderId
      */
     @ApiModelProperty(value = "Authorization Identification")
-    public String getOrderId() {
+    public String getId() {
         return id;
     }
     
-    public void setOrderId(String orderId) {
-        this.id = orderId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public AuthorizationDTO orderId(String orderId) {
-        this.id = orderId;
+    public AuthorizationDTO id(String id) {
+        this.id = id;
         return this;
     }
 
@@ -62,15 +80,15 @@ public class AuthorizationDTO extends RepresentationModel<AuthorizationDTO> impl
      */
     @ApiModelProperty(value = "Timestamp when this authorization was created")
     @Valid
-    public LocalDateTime getTime() {
+    public Timestamp getTime() {
         return time;
     }
     
-    public void setTime(LocalDateTime time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
     
-    public AuthorizationDTO time(LocalDateTime time) {
+    public AuthorizationDTO time(Timestamp time) {
         this.time = time;
         return this;
     }

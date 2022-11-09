@@ -13,7 +13,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @ApiModel(description = "Contains the payment request information")
 public class PaymentDetailDTO extends RepresentationModel<PaymentDetailDTO> implements Serializable {
 

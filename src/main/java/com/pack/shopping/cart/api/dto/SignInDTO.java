@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @ApiModel(description = "Request body for Sign-in")
 public class SignInDTO extends RepresentationModel<SignInDTO> implements Serializable {
 

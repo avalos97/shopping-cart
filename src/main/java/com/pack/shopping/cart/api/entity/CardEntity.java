@@ -13,8 +13,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "card")
+@NoArgsConstructor
 public class CardEntity {
 
     @Id
@@ -37,6 +40,10 @@ public class CardEntity {
 
     @OneToMany(mappedBy = "cardEntity", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<OrderEntity> orders;
+
+    public CardEntity(UUID cardId) {
+        this.cardId = cardId;
+    }
 
     public UUID getCardId() {
         return cardId;

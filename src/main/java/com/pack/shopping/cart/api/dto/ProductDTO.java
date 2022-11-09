@@ -13,29 +13,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @ApiModel(description = "Product information")
 public class ProductDTO extends RepresentationModel<ProductDTO> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @JsonProperty("productId")
+    @JsonProperty("id")
     private String productId;
 
-    @JsonProperty("name")
+    @JsonProperty("title")
     private String name;
 
     @JsonProperty("description")
     private String description;
 
-    @JsonProperty("imageUrl")
+    @JsonProperty("image")
     private String imageUrl;
 
     @JsonProperty("price")
     private BigDecimal price = null;
 
-    @JsonProperty("count")
-    private Integer count;
+    // @JsonProperty("count")
+    // private Integer count;
 
     
     /**
@@ -134,25 +136,6 @@ public class ProductDTO extends RepresentationModel<ProductDTO> implements Seria
         this.price = price;
         return this;
     }
-    
-    /**
-     * Product count
-     * 
-     * @return count
-     */
-    @ApiModelProperty(value = "Product count")
-    public Integer getCount() {
-        return count;
-    }
-    
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-    
-    public ProductDTO count(Integer count) {
-        this.count = count;
-        return this;
-    }
 
     @Override
     public boolean equals(@Nullable Object o) {
@@ -167,13 +150,12 @@ public class ProductDTO extends RepresentationModel<ProductDTO> implements Seria
                 Objects.equals(this.name, product.name) &&
                 Objects.equals(this.description, product.description) &&
                 Objects.equals(this.imageUrl, product.imageUrl) &&
-                Objects.equals(this.price, product.price) &&
-                Objects.equals(this.count, product.count);
+                Objects.equals(this.price, product.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId, name, description, imageUrl, price, count);
+        return Objects.hash(productId, name, description, imageUrl, price);
     }
 
     @Override
@@ -186,7 +168,6 @@ public class ProductDTO extends RepresentationModel<ProductDTO> implements Seria
         sb.append("    description: ").append(toIndentedString(description)).append("\n");
         sb.append("    imageUrl: ").append(toIndentedString(imageUrl)).append("\n");
         sb.append("    price: ").append(toIndentedString(price)).append("\n");
-        sb.append("    count: ").append(toIndentedString(count)).append("\n");
         sb.append("}");
         return sb.toString();
     }

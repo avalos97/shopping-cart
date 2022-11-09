@@ -2,7 +2,7 @@ package com.pack.shopping.cart.api.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +17,9 @@ import com.pack.shopping.cart.api.util.StatusEnum;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @ApiModel(description = "Represents an order")
 public class OrderDTO extends RepresentationModel<OrderDTO> implements Serializable {
 
@@ -33,7 +35,7 @@ public class OrderDTO extends RepresentationModel<OrderDTO> implements Serializa
     private CardDTO card;
 
     @JsonProperty("date")
-    private LocalDateTime date;
+    private Timestamp date;
 
     @JsonProperty("items")
     @Valid
@@ -115,15 +117,15 @@ public class OrderDTO extends RepresentationModel<OrderDTO> implements Serializa
      */
     @ApiModelProperty(value = "Order's data and time details")
     @Valid
-    public LocalDateTime getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
-    public OrderDTO date(LocalDateTime date) {
+    public OrderDTO date(Timestamp date) {
         this.date = date;
         return this;
     }

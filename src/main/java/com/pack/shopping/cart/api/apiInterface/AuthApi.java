@@ -8,9 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import com.pack.shopping.cart.api.dto.RefreshTokenDTO;
@@ -18,10 +19,14 @@ import com.pack.shopping.cart.api.dto.SignInDTO;
 import com.pack.shopping.cart.api.dto.SignedInUserDTO;
 import com.pack.shopping.cart.api.dto.UserDTO;
 
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @Validated
-@Api(value = "User", description = "the User API")
+@Api(value = "Auth", description = "API for the creation and authentication of users or clients")
 public interface AuthApi {
 
     public static final String MEDIA_TYPE = "application/json";
@@ -70,8 +75,8 @@ public interface AuthApi {
 
     @ApiOperation(value = "Signouts the customer (user)", nickname = "signOut", notes = "Signouts the customer (user). It removes the refresh token from DB. Last issued JWT should be removed from client end that if not removed last for given expiration time.")
     @ApiResponses(value = {
-            @ApiResponse(code = 202, message = "Accepts the request for logout.") })
-    @DeleteMapping(value = "/auth/token", consumes = { MEDIA_TYPE })
+            @ApiResponse(code = 200, message = "Accepts the request for logout.") })
+    @RequestMapping(value = "/auth/token", consumes = { MEDIA_TYPE }, method = RequestMethod.DELETE)
     default ResponseEntity<Void> signOut(
             @ApiParam(value = "Refresh token") @Valid @RequestBody(required = false) RefreshTokenDTO refreshToken) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
@@ -81,7 +86,7 @@ public interface AuthApi {
     @ApiOperation(value = "Signup the a new customer (user)", nickname = "signUp", notes = "Creates a new customer (user), who can login and do the shopping.", response = SignedInUserDTO.class)
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "For successful user creation.", response = SignedInUserDTO.class) })
-    @PostMapping(value = "/users", produces = { MEDIA_TYPE }, consumes = { MEDIA_TYPE })
+    @PostMapping(value = "/auth/user", produces = { MEDIA_TYPE }, consumes = { MEDIA_TYPE })
     default ResponseEntity<SignedInUserDTO> signUp(@ApiParam(value = "User Information") @Valid @RequestBody(required = false) UserDTO user) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {

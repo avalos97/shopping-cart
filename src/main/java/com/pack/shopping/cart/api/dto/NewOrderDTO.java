@@ -1,8 +1,6 @@
 package com.pack.shopping.cart.api.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -14,7 +12,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @ApiModel(description = "Contains the new order request information")
 public class NewOrderDTO extends RepresentationModel<NewOrderDTO> implements Serializable {
 
@@ -24,12 +24,7 @@ public class NewOrderDTO extends RepresentationModel<NewOrderDTO> implements Ser
     private String customerId;
 
     @JsonProperty("card")
-    private CardDTO card;
-
-    @JsonProperty("items")
-    @Valid
-    private List<ItemDTO> items = null;
-
+    private String cardId;
     
     /**
      * Get customerId
@@ -58,45 +53,16 @@ public class NewOrderDTO extends RepresentationModel<NewOrderDTO> implements Ser
      */
     @ApiModelProperty(value = "Customer card")
     @Valid
-    public CardDTO getCard() {
-        return card;
+    public String getCardId() {
+        return cardId;
     }
     
-    public void setCard(CardDTO card) {
-        this.card = card;
+    public void setCardId(String card) {
+        this.cardId = card;
     }
 
-    public NewOrderDTO card(CardDTO card) {
-        this.card = card;
-        return this;
-    }
-
-    
-    /**
-     * Items in shopping cart
-     * 
-     * @return items
-     */
-    @ApiModelProperty(value = "Items in shopping cart")
-    @Valid
-    public List<ItemDTO> getItems() {
-        return items;
-    }
-
-    public void setItems(List<ItemDTO> items) {
-        this.items = items;
-    }
-    
-    public NewOrderDTO items(List<ItemDTO> items) {
-        this.items = items;
-        return this;
-    }
-
-    public NewOrderDTO addItemsItem(ItemDTO itemsItem) {
-        if (this.items == null) {
-            this.items = new ArrayList<>();
-        }
-        this.items.add(itemsItem);
+    public NewOrderDTO cardId(String card) {
+        this.cardId = card;
         return this;
     }
 
@@ -110,34 +76,6 @@ public class NewOrderDTO extends RepresentationModel<NewOrderDTO> implements Ser
         }
         NewOrderDTO newOrder = (NewOrderDTO) o;
         return Objects.equals(this.customerId, newOrder.customerId) &&
-                Objects.equals(this.card, newOrder.card) &&
-                Objects.equals(this.items, newOrder.items);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(customerId, card, items);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class NewOrder {\n");
-        sb.append("    customerId: ").append(toIndentedString(customerId)).append("\n");
-        sb.append("    card: ").append(toIndentedString(card)).append("\n");
-        sb.append("    items: ").append(toIndentedString(items)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
+                Objects.equals(this.cardId, newOrder.cardId);
     }
 }

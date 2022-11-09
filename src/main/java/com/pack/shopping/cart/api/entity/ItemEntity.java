@@ -3,12 +3,12 @@ package com.pack.shopping.cart.api.entity;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -18,9 +18,9 @@ import javax.persistence.Table;
 public class ItemEntity {
 
     @Id
-    @GeneratedValue
+@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id", updatable = false, nullable = false)
-    private UUID itemId;
+    private Integer itemId;
 
     @Column(name = "product_id")
     private Integer productId;
@@ -37,11 +37,11 @@ public class ItemEntity {
     @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
     private List<OrderEntity> orders;
 
-    public UUID getItemId() {
+    public Integer getItemId() {
         return itemId;
     }
 
-    public ItemEntity setItemId(UUID itemId) {
+    public ItemEntity setItemId(Integer itemId) {
         this.itemId = itemId;
         return this;
     }

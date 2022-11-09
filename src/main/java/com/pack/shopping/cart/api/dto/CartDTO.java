@@ -14,7 +14,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @ApiModel(description = "Shopping Cart of the user")
 public class CartDTO extends RepresentationModel<CardDTO> implements Serializable {
 

@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @ApiModel(description = "User or customer information")
 public class UserDTO extends RepresentationModel<UserDTO> implements Serializable {
 
@@ -43,7 +45,10 @@ public class UserDTO extends RepresentationModel<UserDTO> implements Serializabl
     @JsonProperty("cardId")
     private String cardId;
 
-    
+    public UserDTO(String userId) {
+        this.userId = userId;
+    }
+
     /**
      * Get id
      * 
@@ -58,11 +63,11 @@ public class UserDTO extends RepresentationModel<UserDTO> implements Serializabl
         this.userId = userId;
     }
 
-    
     public UserDTO userId(String userId) {
         this.userId = userId;
         return this;
     }
+
     /**
      * Get username
      * 
@@ -72,76 +77,76 @@ public class UserDTO extends RepresentationModel<UserDTO> implements Serializabl
     public String getUsername() {
         return username;
     }
-    
+
     public void setUsername(String username) {
         this.username = username;
     }
-    
+
     public UserDTO username(String username) {
         this.username = username;
         return this;
     }
-    
+
     /**
      * Get firstName
      * 
      * @return firstName
      */
     @ApiModelProperty(value = "Customer first")
-    
+
     public String getFirstName() {
         return firstName;
     }
-    
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-    
+
     public UserDTO firstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
-    
+
     /**
      * Get lastName
      * 
      * @return lastName
      */
     @ApiModelProperty(value = "customer's last name")
-    
+
     public String getLastName() {
         return lastName;
     }
-    
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
+
     public UserDTO lastName(String lastName) {
         this.lastName = lastName;
         return this;
     }
-    
+
     /**
      * Get email
      * 
      * @return email
      */
     @ApiModelProperty(value = "Customer email")
-    
+
     public String getEmail() {
         return email;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     public UserDTO email(String email) {
         this.email = email;
         return this;
     }
-    
+
     /**
      * Get password
      * 
@@ -151,16 +156,16 @@ public class UserDTO extends RepresentationModel<UserDTO> implements Serializabl
     public String getPassword() {
         return password;
     }
-    
+
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public UserDTO password(String password) {
         this.password = password;
         return this;
     }
-    
+
     /**
      * Get phone
      * 
@@ -170,16 +175,16 @@ public class UserDTO extends RepresentationModel<UserDTO> implements Serializabl
     public String getPhone() {
         return phone;
     }
-    
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    
+
     public UserDTO phone(String phone) {
         this.phone = phone;
         return this;
     }
-    
+
     /**
      * Get userStatus
      * 
@@ -189,32 +194,31 @@ public class UserDTO extends RepresentationModel<UserDTO> implements Serializabl
     public String getUserStatus() {
         return userStatus;
     }
-    
+
     public void setUserStatus(String userStatus) {
         this.userStatus = userStatus;
     }
-    
+
     public UserDTO userStatus(String userStatus) {
         this.userStatus = userStatus;
         return this;
     }
 
-    
     /**
      * Get cardId
      * 
      * @return cardId
      */
     @ApiModelProperty(value = "Customer card identifier")
-    
+
     public String getCardId() {
         return cardId;
     }
-    
+
     public void setCardId(String cardId) {
         this.cardId = cardId;
     }
-    
+
     public UserDTO cardId(String cardId) {
         this.cardId = cardId;
         return this;

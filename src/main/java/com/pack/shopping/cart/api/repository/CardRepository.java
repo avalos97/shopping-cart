@@ -10,4 +10,5 @@ import com.pack.shopping.cart.api.entity.CardEntity;
 @Repository
 public interface CardRepository extends JpaRepository<CardEntity, UUID>{
     
+    public boolean existsByNumber(String number);
 }
