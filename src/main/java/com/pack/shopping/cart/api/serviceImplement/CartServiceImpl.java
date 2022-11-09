@@ -1,5 +1,6 @@
 package com.pack.shopping.cart.api.serviceImplement;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -52,7 +53,10 @@ public class CartServiceImpl implements CartService {
             throw new GenericAlreadyExistsException(
                 String.format("Item with Id (%s) already exists. You can update it.", item.getItemId()));
         }
-        entity.getItems().add(itemService.toEntity(item));
+        var i = itemService.toEntity(item);
+        List<ItemEntity> list = new ArrayList<>(entity.getItems());
+        list.add(i);
+        entity.setItems(list);
         return itemService.toModelList(repository.save(entity).getItems());
     }
 

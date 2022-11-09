@@ -22,7 +22,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import io.swagger.annotations.Authorization;
 
 @Validated
 @Api(value = "Payment", description = "the Payment API")
@@ -65,7 +64,7 @@ public interface PaymentApi {
         value = "/payments",
         produces = { MEDIA_TYPE }
     )
-    default ResponseEntity<Authorization> getOrdersPaymentAuthorization(@NotNull @ApiParam(value = "Order Identifier", required = true) @Valid @RequestParam(value = "orderId", required = true) String orderId) {
+    default ResponseEntity<AuthorizationDTO> getOrdersPaymentAuthorization(@NotNull @ApiParam(value = "Order Identifier", required = true) @Valid @RequestParam(value = "orderId", required = true) String orderId) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(MEDIA_TYPE))) {

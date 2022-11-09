@@ -1,7 +1,6 @@
 package com.pack.shopping.cart.api.dto;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -27,7 +26,7 @@ public class AuthorizationDTO extends RepresentationModel<AuthorizationDTO> impl
     private String orderId;
 
     @JsonProperty("time")
-    private Timestamp time;
+    private String time;
 
     @JsonProperty("authorized")
     private Boolean authorized;
@@ -80,15 +79,15 @@ public class AuthorizationDTO extends RepresentationModel<AuthorizationDTO> impl
      */
     @ApiModelProperty(value = "Timestamp when this authorization was created")
     @Valid
-    public Timestamp getTime() {
+    public String getTime() {
         return time;
     }
     
-    public void setTime(Timestamp time) {
+    public void setTime(String time) {
         this.time = time;
     }
     
-    public AuthorizationDTO time(Timestamp time) {
+    public AuthorizationDTO time(String time) {
         this.time = time;
         return this;
     }

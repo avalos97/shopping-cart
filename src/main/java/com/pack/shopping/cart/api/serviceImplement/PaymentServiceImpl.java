@@ -1,5 +1,7 @@
 package com.pack.shopping.cart.api.serviceImplement;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -30,26 +32,32 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public Optional<AuthorizationEntity> addauthorization(AuthorizationDTO authorize) {
-    
+
         if (authorizationRepository.findByOrderId(UUID.fromString(authorize.getOrderId())) != null) {
             throw new GenericAlreadyExistsException("the order already has an authorization");
         }
-        OrderEntity order = orderRepository.findById(UUID.fromString(authorize.getOrderId())).orElseThrow(() -> new ResourceNotFoundException("Order not found"));
+        OrderEntity order = orderRepository.findById(UUID.fromString(authorize.getOrderId()))
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
         if (!Strings.isBlank(authorize.getError())) {
-            order.setStatus(StatusEnum.PAYMENT_FAILED);   
-        }else if(authorize.getAuthorized()){
-            order.setStatus(StatusEnum.PAID);
+            order.setStatus(StatusEnum.valueOf("PAYMENT_FAILED"));
+        } else if (authorize.getAuthorized()) {
+            order.setStatus(StatusEnum.valueOf("PAID"));
         }
         return Optional.of(authorizationRepository.save(toEntity(authorize).setOrderEntity(order)));
 
+    }
+
+    @Override
+    public AuthorizationEntity getByOrderId(String orderId) {
+        return Optional.ofNullable(this.authorizationRepository.findByOrderId(UUID.fromString(orderId)))
+                .orElseThrow(() -> new ResourceNotFoundException("order id - " + orderId));
     }
 
     private AuthorizationEntity toEntity(AuthorizationDTO auth) {
         AuthorizationEntity entity = new AuthorizationEntity();
         Optional<OrderEntity> order = orderRepository.findById(UUID.fromString(auth.getOrderId()));
         order.ifPresent(o -> entity.setOrderEntity(o));
-        return entity.setAuthorized(auth.getAuthorized()).setTime(auth.getTime()).setMessage(auth.getMessage())
+        return entity.setAuthorized(auth.getAuthorized()).setTime(Timestamp.from(Instant.now())).setMessage(auth.getMessage())
                 .setError(auth.getError());
     }
-
 }

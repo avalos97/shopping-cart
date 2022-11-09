@@ -70,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
         if (Objects.isNull(newOrder.getCardId()) || Strings.isEmpty(newOrder.getCardId()) || !cardRepository.existsById(UUID.fromString(newOrder.getCardId()))) {
             throw new ResourceNotFoundException("Invalid card id.");
         }
-        // TODO: mmmm
+        
         Iterable<ItemEntity> dbItems = itemRepository.findByCustomerId(UUID.fromString(newOrder.getCustomerId()));
         List<ItemEntity> items = StreamSupport.stream(dbItems.spliterator(), false).collect(Collectors.toList());
         if (items.size() < 1) {

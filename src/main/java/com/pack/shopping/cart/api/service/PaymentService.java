@@ -8,4 +8,6 @@ import com.pack.shopping.cart.api.entity.AuthorizationEntity;
 public interface PaymentService {
     
     public Optional<AuthorizationEntity> addauthorization(AuthorizationDTO authorize); 
+
+    public AuthorizationEntity getByOrderId(String authorize); 
 }

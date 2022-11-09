@@ -12,8 +12,6 @@ import com.pack.shopping.cart.api.dto.AuthorizationDTO;
 import com.pack.shopping.cart.api.hateoas.PaymentRepresentationModelAssembler;
 import com.pack.shopping.cart.api.service.PaymentService;
 
-import io.swagger.annotations.Authorization;
-
 @RestController
 public class PaymentRestController implements PaymentApi {
 
@@ -26,9 +24,8 @@ public class PaymentRestController implements PaymentApi {
     }
 
     @Override
-    public ResponseEntity<Authorization> getOrdersPaymentAuthorization(@NotNull @Valid String orderId) {
-        // TODO Auto-generated method stub
-        return PaymentApi.super.getOrdersPaymentAuthorization(orderId);
+    public ResponseEntity<AuthorizationDTO> getOrdersPaymentAuthorization(@NotNull @Valid String orderId) {
+        return ok(this.assembler.toModel(this.paymentService.getByOrderId(orderId)));
     }
 
     @Override
