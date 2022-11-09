@@ -18,6 +18,9 @@ import javax.validation.constraints.NotNull;
 
 import com.pack.shopping.cart.api.util.RoleEnum;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 @Entity
 @Table(name = "user")
 public class UserEntity {
@@ -62,6 +65,10 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<OrderEntity> orders;
+
+    public UserEntity(UUID userId) {
+        this.userId = userId;
+    }
 
     public UUID getUserId() {
         return userId;

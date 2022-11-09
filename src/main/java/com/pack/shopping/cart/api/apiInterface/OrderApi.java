@@ -20,7 +20,11 @@ import org.springframework.web.context.request.NativeWebRequest;
 import com.pack.shopping.cart.api.dto.NewOrderDTO;
 import com.pack.shopping.cart.api.dto.OrderDTO;
 
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @Validated
 @Api(value = "Order", description = "the Order API")
@@ -35,7 +39,7 @@ public interface OrderApi {
     @ApiOperation(value = "Creates a new order for the given order request", nickname = "addOrder", notes = "Creates a new order for the given order request.", response = OrderDTO.class)
     @ApiResponses(value = { 
         @ApiResponse(code = 201, message = "Order added successfully", response = OrderDTO.class),
-        @ApiResponse(code = 406, message = "If payment is not authorized.") })
+        @ApiResponse(code = 401, message = "If payment is not authorized.") })
     @PostMapping(
         value = "/orders",
         produces = { MEDIA_TYPE },

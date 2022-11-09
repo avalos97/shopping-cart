@@ -22,7 +22,7 @@ public class OrderItemEntity {
     private UUID orderId;
 
     @Column(name = "item_id")
-    private UUID itemId;
+    private Integer itemId;
 
     public UUID getId() {
         return id;
@@ -42,11 +42,11 @@ public class OrderItemEntity {
         return this;
     }
 
-    public UUID getItemId() {
+    public Integer getItemId() {
         return itemId;
     }
 
-    public OrderItemEntity setItemId(UUID itemId) {
+    public OrderItemEntity setItemId(Integer itemId) {
         this.itemId = itemId;
         return this;
     }

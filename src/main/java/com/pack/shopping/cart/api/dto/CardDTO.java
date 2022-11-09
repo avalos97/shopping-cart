@@ -10,9 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
+import lombok.NoArgsConstructor;
+@NoArgsConstructor
 @ApiModel(description = "Represents a user card")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
 public class CardDTO extends RepresentationModel<CardDTO> implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,6 +31,10 @@ public class CardDTO extends RepresentationModel<CardDTO> implements Serializabl
 
     @JsonProperty("userId")
     private String userId;
+
+    public CardDTO(String cardId) {
+        this.cardId = cardId;
+    }
 
     /**
      * Card identifier

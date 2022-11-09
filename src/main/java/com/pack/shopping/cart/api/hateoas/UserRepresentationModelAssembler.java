@@ -2,6 +2,7 @@ package com.pack.shopping.cart.api.hateoas;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
+import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -16,6 +17,7 @@ import com.pack.shopping.cart.api.controller.CustomerRestContoller;
 import com.pack.shopping.cart.api.dto.UserDTO;
 import com.pack.shopping.cart.api.entity.UserEntity;
 
+@Component
 public class UserRepresentationModelAssembler extends RepresentationModelAssemblerSupport<UserEntity, UserDTO> {
 
     /**

@@ -9,9 +9,7 @@ public enum StatusEnum {
     
     PAID("PAID"),
     
-    PAYMENT_FAILED("PAYMENT_FAILED"),
-    
-    COMPLETED("COMPLETED");
+    PAYMENT_FAILED("PAYMENT_FAILED");
 
     private String value;
 

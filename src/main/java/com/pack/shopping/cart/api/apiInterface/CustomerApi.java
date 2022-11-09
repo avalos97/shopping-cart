@@ -15,7 +15,11 @@ import org.springframework.web.context.request.NativeWebRequest;
 import com.pack.shopping.cart.api.dto.CardDTO;
 import com.pack.shopping.cart.api.dto.UserDTO;
 
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @Validated
 @Api(value = "Customer", description = "the Customer API")

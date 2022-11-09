@@ -39,7 +39,7 @@ public class OrderEntity {
     @Enumerated(EnumType.STRING)
     private StatusEnum status;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
     private UserEntity userEntity;
 
@@ -47,7 +47,7 @@ public class OrderEntity {
     @JoinColumn(name = "payment_id", referencedColumnName = "payment_id")
     private PaymentEntity paymentEntity;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "card_id", referencedColumnName = "card_id")
     private CardEntity cardEntity;
 

@@ -13,14 +13,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @ApiModel(description = "Items in shopping cart")
 public class ItemDTO extends RepresentationModel<ItemDTO> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @JsonProperty("itemId")
-    private String itemId;
+    private Integer itemId;
 
     @JsonProperty("name")
     private String name;
@@ -44,15 +46,15 @@ public class ItemDTO extends RepresentationModel<ItemDTO> implements Serializabl
      * @return id
      */
     @ApiModelProperty(value = "Item Identifier")
-    public String getItemId() {
+    public Integer getItemId() {
         return itemId;
     }
     
-    public void setItemId(String itemId) {
+    public void setItemId(Integer itemId) {
         this.itemId = itemId;
     }
     
-    public ItemDTO itemId(String id) {
+    public ItemDTO itemId(Integer id) {
         this.itemId = id;
         return this;
     }

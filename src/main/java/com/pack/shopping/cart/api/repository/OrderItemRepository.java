@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.pack.shopping.cart.api.entity.OrderItemEntity;
 
 @Repository
-public interface OrdenItemRepository extends JpaRepository<OrderItemEntity, UUID>{
+public interface OrderItemRepository extends JpaRepository<OrderItemEntity, UUID>{
     
 }

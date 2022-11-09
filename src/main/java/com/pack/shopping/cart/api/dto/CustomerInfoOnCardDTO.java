@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @ApiModel(description = "Customer information required for payment processing")
 public class CustomerInfoOnCardDTO extends RepresentationModel<CustomerInfoOnCardDTO> implements Serializable {
 

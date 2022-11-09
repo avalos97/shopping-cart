@@ -16,9 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import com.pack.shopping.cart.api.dto.AuthorizationDTO;
-import com.pack.shopping.cart.api.dto.PaymentDetailDTO;
 
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
 
 @Validated
 @Api(value = "Payment", description = "the Payment API")
@@ -30,15 +34,17 @@ public interface PaymentApi {
         return Optional.empty();
     }
 
-    @ApiOperation(value = "Authorize a payment request", nickname = "authorize", notes = "Authorize a payment request.", response = AuthorizationDTO.class)
+    @ApiOperation(value = "Authorize the payment of an order", nickname = "authorize", notes = "Authorize a payment request.", response = AuthorizationDTO.class)
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "For successful fetch.", response = AuthorizationDTO.class) })
+        @ApiResponse(code = 200, message = "For successful fetch.", response = AuthorizationDTO.class),
+        @ApiResponse(code = 402, message = "If the order already has an authorization."),
+        @ApiResponse(code = 404, message = "If the Order not found.") })
     @PostMapping(
-        value = "/payments",
+        value = "/payment",
         produces = { MEDIA_TYPE },
         consumes = { MEDIA_TYPE }
     )
-    default ResponseEntity<AuthorizationDTO> authorize(@ApiParam(value = ""  )  @Valid @RequestBody(required = false) PaymentDetailDTO paymentReq) {
+    default ResponseEntity<AuthorizationDTO> authorize(@ApiParam(value = "Payment object"  )  @Valid @RequestBody(required = false) AuthorizationDTO authPayment) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf(MEDIA_TYPE))) {
