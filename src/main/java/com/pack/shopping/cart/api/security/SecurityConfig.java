@@ -2,6 +2,12 @@ package com.pack.shopping.cart.api.security;
 
 import static com.pack.shopping.cart.api.security.Constants.AUTHORITY_PREFIX;
 import static com.pack.shopping.cart.api.security.Constants.ROLE_CLAIM;
+import static com.pack.shopping.cart.api.security.Constants.SIGNUP_URL;
+import static com.pack.shopping.cart.api.security.Constants.TOKEN_URL;
+import static com.pack.shopping.cart.api.security.Constants.REFRESH_URL;
+import static com.pack.shopping.cart.api.security.Constants.SWAGGUER_RESOURCE;
+import static com.pack.shopping.cart.api.security.Constants.SWAGGUER_UI;
+import static com.pack.shopping.cart.api.security.Constants.API_DOCS;
 
 import com.pack.shopping.cart.api.serviceImplement.UserDetailServiceImpl;
 
@@ -28,7 +34,6 @@ import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -68,29 +73,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     this.userService = userService;
   }
 
-  private static final String[] AUTH_WHITELIST = {
-      "/swagger-resources/**",
-      "/swagger-ui/**",
-      "/v2/api-docs",
-      "/webjars/**",
-      "/auth/**"
-  };
-
-  @Override
-  public void configure(WebSecurity web) throws Exception {
-    web.ignoring().antMatchers(AUTH_WHITELIST);
-  }
-
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.httpBasic().disable().formLogin().disable()
-        .csrf()
-        .and()
+    http
+        .httpBasic().disable().formLogin().disable()
+        .csrf().disable()
         .headers().frameOptions().sameOrigin()
         .and()
-        .cors()
+        .cors().configurationSource(corsConfigurationSource())
         .and()
         .authorizeRequests()
+        // .authorizeRequests()
+        //.mvcMatchers("/auth/**").permitAll()
+        .antMatchers(TOKEN_URL, SIGNUP_URL, REFRESH_URL, API_DOCS, SWAGGUER_UI, SWAGGUER_RESOURCE).permitAll()
+        .antMatchers("/cards").hasAnyAuthority("ROLE_ADMIN")
         .anyRequest().authenticated()
         .and()
         .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(
